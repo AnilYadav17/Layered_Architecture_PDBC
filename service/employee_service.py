@@ -23,3 +23,8 @@ class EmployeeService:
             d1 = EmployeeDao()
             rows = d1.update_emp_by_id(id,name,salary)
             return rows
+    
+    def delete_employee_by_id(self,id):
+        d1 = EmployeeDao()
+        rows = d1.delete_emp_by_id(id)
+        return rows
