@@ -42,3 +42,13 @@ class EmployeeDao:
             employee = Employee(row[0],row[1],row[2])
             return employee
         return None
+        
+    def update_emp_by_id(self,id,name,salary):
+        db = Database()
+        conn = db.connect()
+        cursor = conn.cursor()
+        query = "update pdemployee1 set name = %s,salary =%s where id = %s"
+        cursor.execute(query,(name,salary,id))
+        conn.commit()
+        conn.close()
+        return cursor.rowcount
