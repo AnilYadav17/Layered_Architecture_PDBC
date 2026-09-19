@@ -29,3 +29,16 @@ class EmployeeDao:
         cursor.execute(query,data)
         conn.commit()
         print("Data saved successfully!!")
+        
+    def get_emp_by_id(self,id):
+        db = Database()
+        conn = db.connect()
+        cursor = conn.cursor()
+        query = "select * from pdemployee1 where id = %s"
+        cursor.execute(query,(id,))
+        row = cursor.fetchone()
+        conn.close()
+        if row is not None:
+            employee = Employee(row[0],row[1],row[2])
+            return employee
+        return None
