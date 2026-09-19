@@ -18,3 +18,8 @@ class EmployeeService:
         d1 = EmployeeDao()
         employee = d1.get_emp_by_id(id)
         return employee
+    
+    def update_employee_by_id(self,id,name,salary):
+            d1 = EmployeeDao()
+            rows = d1.update_emp_by_id(id,name,salary)
+            return rows
