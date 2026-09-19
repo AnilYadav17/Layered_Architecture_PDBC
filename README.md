@@ -103,5 +103,7 @@ python3 main.py
 
 ---
 
-## Theory Documentation
-For the complete theoretical breakdown, design pattern explanations, and architectural analysis, refer to [Architecture.md](Architecture.md).
+## Theory & Code Walkthrough Guide
+For a simple, step-by-step breakdown of your working code and the core theory behind it, refer to [Architecture.md](Architecture.md):
+- **Part 1: Your Working Code (How It Runs)**: Clear step-by-step execution of all 5 CRUD operations.
+- **Part 2: Core Theory (Made Simple)**: Easy explanations of the restaurant analogy, DTOs, data hydration, `conn.commit()`, and SQL security.
