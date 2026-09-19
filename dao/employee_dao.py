@@ -43,6 +43,17 @@ class EmployeeDao:
             return employee
         return None
         
+    def delete_emp_by_id(self,id):
+        db = Database()
+        conn = db.connect()
+        cursor = conn.cursor()
+        query = "delete from pdemployee1 where id = %s"
+        cursor.execute(query,(id,))
+        row = cursor.rowcount
+        conn.commit()
+        conn.close()
+        return row
+        
     def update_emp_by_id(self,id,name,salary):
         db = Database()
         conn = db.connect()
