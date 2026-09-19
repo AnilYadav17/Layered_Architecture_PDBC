@@ -10,11 +10,18 @@ This project demonstrates how to structure a production-grade Python database ap
 
 ### Architecture Layers
 
-1. **Presentation / Client Layer (`main.py`)**: UI and application entry point.
-2. **Business Logic / Service Layer (`service/employee_service.py`)**: Validates business rules and coordinates workflows.
-3. **Data Access Object Layer (`dao/employee_dao.py`)**: Prepares parameterized SQL queries and handles database transactions (`commit`/`rollback`).
-4. **Infrastructure Layer (`database/connection.py`)**: Manages MySQL connection sockets and driver configuration.
-5. **Cross-Cutting Model Layer (`model/employee.py`)**: Encapsulates data transfer objects (DTO) transferred cleanly across boundaries.
+1. **Presentation / Client Layer (`main.py`)**: CLI entry point handling user I/O, prompts, and formatted feedback.
+2. **Business Logic / Service Layer (`service/employee_service.py`)**: Business rule validation and workflow orchestration across all CRUD operations.
+3. **Data Access Object Layer (`dao/employee_dao.py`)**: Query formulation, `%s` parameter binding, transactional demarcation (`commit`), and object-relational hydration (`row` tuple to `Employee` entity).
+4. **Infrastructure Layer (`database/connection.py`)**: Connection factory managing MySQL socket lifecycles and environment-based configuration.
+5. **Cross-Cutting Model Layer (`model/employee.py`, `model/product.py`)**: Domain entities / DTOs transferred cleanly across boundaries without leaking relational database schemas.
+
+### Implemented Capabilities (Full CRUD Lifecycle)
+- **Create:** Instantiates domain object, delegates through service, issues parameterized `INSERT`, and commits transaction.
+- **Read All:** Executes `SELECT *`, streams rows through `cursor.fetchall()`, hydratively transforms tuples into `Employee` objects, and closes connections cleanly.
+- **Search (Read by ID):** Executes parameterized `SELECT ... WHERE id = %s` using `(id,)` tuple, fetches single row via `cursor.fetchone()`, and handles null checks (`None`).
+- **Update:** Prepares `UPDATE ... WHERE id = %s`, binds `(name, salary, id)`, commits transaction, and evaluates `cursor.rowcount`.
+- **Delete:** Executes parameterized `DELETE ... WHERE id = %s`, commits transaction, and verifies `cursor.rowcount`.
 
 ---
 
@@ -37,18 +44,19 @@ This project demonstrates how to structure a production-grade Python database ap
 ## Project Structure
 
 ```
-Layered/
+LayeredArchitecture_Main/
 ├── main.py                     # Entry point (Presentation Layer)
 ├── requirements.txt            # Project dependencies
 ├── .env.example                # Sample environment configuration
 ├── .gitignore                  # Git ignore rules
 ├── Architecture.md             # Complete in-depth theoretical guide
 ├── model/
-│   └── employee.py             # Employee entity (Model / DTO)
+│   ├── employee.py             # Employee entity (Model / DTO)
+│   └── product.py              # Product entity (Multi-domain Model)
 ├── service/
 │   └── employee_service.py     # Business logic & orchestration (Service)
 ├── dao/
-│   └── employee_dao.py         # Database access & SQL execution (DAO)
+│   └── employee_dao.py         # Database access, SQL CRUD & Hydration (DAO)
 ├── database/
 │   └── connection.py           # MySQL connection factory
 └── images/                     # 300 DPI architectural diagrams
