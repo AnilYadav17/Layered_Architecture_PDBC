@@ -13,3 +13,8 @@ class EmployeeService:
         print("service adding new employee...")
         d1 = EmployeeDao()
         d1.save_employee(employee)
+        
+    def search_employee_by_id(self,id):
+        d1 = EmployeeDao()
+        employee = d1.get_emp_by_id(id)
+        return employee
