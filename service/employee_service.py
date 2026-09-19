@@ -1,12 +1,13 @@
 from dao.employee_dao import EmployeeDao
 
 class EmployeeService:
-    def displayemployee(self):
+    def display_all_employees(self):
         # Code to display employee information
         print("Processing employee information...")
         d1 = EmployeeDao()
-        d1.getemployee()
-        
+        employees = d1.get_all_employees()
+        return employees
+    
     def add_employee(self, employee):
         # Code to add a new employee
         print("service adding new employee...")
