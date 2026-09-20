@@ -2,7 +2,7 @@
 
 A clean, enterprise-grade implementation of the **Layered (N-Tier) Architecture Pattern** using Python and MySQL.
 
-![Layered Architecture Overview](images/01_layered_architecture_overview.png)
+![Layered Architecture Overview](theory/images/01_layered_architecture_overview.png)
 
 ## Overview
 
@@ -28,16 +28,16 @@ This project demonstrates how to structure a production-grade Python database ap
 ## Diagrams
 
 ### 1. Execution & Data Flow
-![Execution Flow](images/02_execution_data_flow.png)
+![Execution Flow](theory/images/02_execution_data_flow.png)
 
 ### 2. Component Responsibility Matrix
-![Component Responsibility Matrix](images/03_component_responsibility_matrix.png)
+![Component Responsibility Matrix](theory/images/03_component_responsibility_matrix.png)
 
 ### 3. UML Class Diagram & Database Schema
-![UML Class Diagram](images/04_uml_class_diagram.png)
+![UML Class Diagram](theory/images/04_uml_class_diagram.png)
 
 ### 4. Monolithic Script vs. Layered Architecture
-![Monolithic vs Layered](images/05_monolithic_vs_layered.png)
+![Monolithic vs Layered](theory/images/05_monolithic_vs_layered.png)
 
 ---
 
@@ -49,17 +49,20 @@ LayeredArchitecture_Main/
 ├── requirements.txt            # Project dependencies
 ├── .env.example                # Sample environment configuration
 ├── .gitignore                  # Git ignore rules
-├── Architecture.md             # Complete in-depth theoretical guide
-├── model/
-│   ├── employee.py             # Employee entity (Model / DTO)
-│   └── product.py              # Product entity (Multi-domain Model)
-├── service/
-│   └── employee_service.py     # Business logic & orchestration (Service)
-├── dao/
-│   └── employee_dao.py         # Database access, SQL CRUD & Hydration (DAO)
-├── database/
-│   └── connection.py           # MySQL connection factory
-└── images/                     # 300 DPI architectural diagrams
+├── README.md                   # Project overview & quickstart
+├── theory/                     # Theory documentation & visual diagrams
+│   ├── Architecture.md         # Full architecture and theory guide
+│   └── images/                 # 300 DPI architectural diagrams
+├── model/                      # Domain entities (DTOs)
+│   ├── employee.py
+│   └── product.py
+├── service/                    # Business logic & orchestration (Service)
+│   └── employee_service.py
+├── dao/                        # Database access, SQL CRUD & Hydration (DAO)
+│   └── employee_dao.py
+├── database/                   # MySQL connection factory
+│   └── connection.py
+└── venv/                       # Virtual environment
 ```
 
 ---
@@ -104,6 +107,6 @@ python3 main.py
 ---
 
 ## Theory & Code Walkthrough Guide
-For a simple, step-by-step breakdown of your working code and the core theory behind it, refer to [Architecture.md](Architecture.md):
+For a simple, step-by-step breakdown of your working code and the core theory behind it, refer to [theory/Architecture.md](theory/Architecture.md):
 - **Part 1: Your Working Code (How It Runs)**: Clear step-by-step execution of all 5 CRUD operations.
 - **Part 2: Core Theory (Made Simple)**: Easy explanations of the restaurant analogy, DTOs, data hydration, `conn.commit()`, and SQL security.
