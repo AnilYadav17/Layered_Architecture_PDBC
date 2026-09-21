@@ -248,14 +248,14 @@ Look at this comparison:
 You also created [`model/product.py`](file:///home/anil/Desktop/LayeredArchitecture_Main/model/product.py):
 ```python
 class Product:
-    def __init__(self, id, name, salary):
+    def __init__(self, id, name, price):
         self.id = id
         self.name = name
-        self.salary = salary
+        self.price = price
 ```
 Because the architecture is layered:
-- You can add `ProductDao` and `ProductService` without changing any existing Employee code!
-- Both services can share the same database connection in `database/connection.py`.
+- `ProductDao` and `ProductService` follow the identical pattern without modifying any existing Employee code!
+- Both services share the same central database connection in `database/connection.py`.
 
 ---
 
