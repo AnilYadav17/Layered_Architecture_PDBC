@@ -52,14 +52,17 @@ LayeredArchitecture_Main/
 ├── README.md                   # Project overview & quickstart
 ├── theory/                     # Theory documentation & visual diagrams
 │   ├── Architecture.md         # Full architecture and theory guide
+│   ├── generate_diagrams.py    # Diagram generator script (Matplotlib)
 │   └── images/                 # 300 DPI architectural diagrams
 ├── model/                      # Domain entities (DTOs)
 │   ├── employee.py
 │   └── product.py
 ├── service/                    # Business logic & orchestration (Service)
-│   └── employee_service.py
+│   ├── employee_service.py
+│   └── product_service.py
 ├── dao/                        # Database access, SQL CRUD & Hydration (DAO)
-│   └── employee_dao.py
+│   ├── employee_dao.py
+│   └── product_dao.py
 ├── database/                   # MySQL connection factory
 │   └── connection.py
 └── venv/                       # Virtual environment
