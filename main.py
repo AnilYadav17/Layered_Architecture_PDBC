@@ -1,44 +1,72 @@
-from service.employee_service import EmployeeService
 from model.employee import Employee
-print("Welcome to our Website")
-s1 = EmployeeService()
-#s1.displayemployee()
-#Employee = Employee((1, "Anil Yadav",99999))
-# s1.add_employee(Employee(10, "Anil Yadav",99999))
-# p1.add_product(Product(1,'Laptop',50000))
+from service.employee_service import EmployeeService
 
-Employees = s1.display_all_employees()
-for employee in Employees:
-    print('ID:',employee.id)
-    print('Name:',employee.name)
-    print('Salary:',employee.salary)
-    print()
+def display_employees():
+    service = EmployeeService()
+    employees = service.display_all_employees()
+    print("\n--- EMPLOYEE LIST ---")
+    if not employees:
+        print("No employee records found.")
+    else:
+        for emp in employees:
+            print(f"ID: {emp.id:<6} | Name: {emp.name:<20} | Salary: ₹{emp.salary:,.2f}")
+    print("---------------------")
 
-# #SEARCH
-# id = int(input("Enter Employee id to search: "))
-# employee = s1.search_employee_by_id(id)
-# if employee is None:
-#     print("Employee not found")
-# else:
-#     print('ID:',employee.id)
-#     print('Name:',employee.name)
-#     print('Salary:',employee.salary)
-    
-    
-#DELETE
-# id = int(input("Enter Employee id to search: "))
-# rows = s1.delete_employee_by_id(id)
-# if rows==0:
-#     print("Data not found!")
-# else:
-#     print("Date deleted successfully...")
+def add_employee():
+    service = EmployeeService()
+    try:
+        emp_id = int(input("Enter Employee ID: "))
+        name = input("Enter Employee Name: ").strip()
+        salary = float(input("Enter Employee Salary: "))
+        if not name:
+            print("[Error] Name cannot be empty.")
+            return
+        service.add_employee(Employee(emp_id, name, salary))
+    except ValueError:
+        print("[Error] Invalid input. ID must be an integer and Salary must be a number.")
+    except Exception as e:
+        print(f"[Error] Failed to add employee: {e}")
 
-#UPDATE
-# id = int(input("Enter Employee id to search: "))
-# name = input("Enter EmployeeName : ")
-# salary = float(input("Enter Salary : "))
-# rows = s1.update_employee_by_id(id,name,salary)
-# if rows==0:
-#     print("Data not found!")
-# else:
-#     print("Data updated successfully...")
+def search_employee():
+    service = EmployeeService()
+    try:
+        emp_id = int(input("Enter Employee ID to search: "))
+        emp = service.search_employee_by_id(emp_id)
+        if emp is None:
+            print(f"Employee with ID {emp_id} not found.")
+        else:
+            print(f"Found Employee -> ID: {emp.id}, Name: {emp.name}, Salary: ₹{emp.salary:,.2f}")
+    except ValueError:
+        print("[Error] Please enter a valid numeric ID.")
+    except Exception as e:
+        print(f"[Error] Search failed: {e}")
+
+def update_employee():
+    service = EmployeeService()
+    try:
+        emp_id = int(input("Enter Employee ID to update: "))
+        name = input("Enter New Name: ").strip()
+        salary = float(input("Enter New Salary: "))
+        rows = service.update_employee_by_id(emp_id, name, salary)
+        if rows == 0:
+            print(f"No employee found with ID {emp_id}.")
+        else:
+            print("Employee data updated successfully.")
+    except ValueError:
+        print("[Error] Invalid input. Please enter valid numeric values for ID and Salary.")
+    except Exception as e:
+        print(f"[Error] Update failed: {e}")
+
+def delete_employee():
+    service = EmployeeService()
+    try:
+        emp_id = int(input("Enter Employee ID to delete: "))
+        rows = service.delete_employee_by_id(emp_id)
+        if rows == 0:
+            print(f"No employee found with ID {emp_id}.")
+        else:
+            print("Employee deleted successfully.")
+    except ValueError:
+        print("[Error] Please enter a valid numeric ID.")
+    except Exception as e:
+        print(f"[Error] Delete failed: {e}")
