@@ -28,6 +28,7 @@ class EmployeeDao:
         data = (employee.id,employee.name,employee.salary)
         cursor.execute(query,data)
         conn.commit()
+        conn.close()
         print("Data saved successfully!!")
         
     def get_emp_by_id(self,id):
